@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 app.use("/uploads", express.static("uploads"));
 
-var port = process.env.port;
+var port = process.env.PORT;
 
 app.use(
   cors({
