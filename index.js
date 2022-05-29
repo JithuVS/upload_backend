@@ -36,4 +36,4 @@ mongoose
     console.log(error.message);
   });
 app.use("/", authRoutes);
-app.listen(port, () => console.log(`Server running on port ${port}!`));
+app.listen(port || 4000, () => console.log(`Server running on port ${port}!`));
