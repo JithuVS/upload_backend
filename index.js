@@ -12,7 +12,10 @@ app.use("/uploads", express.static("uploads"));
 var port = process.env.PORT;
 
 app.use(
-  cors()
+  cors({
+    origin: ["https://uplooads.herokuapp.com"],
+    credentials: true,
+  })
 );
 
 app.use(express.json());
