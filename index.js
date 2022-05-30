@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/uploads", express.static("uploads"));
-const url = process.env.url;
+const url = process.env.uurl;
 mongoose
   .connect(url, {
     useNewUrlParser: true,
