@@ -18,7 +18,7 @@ var port = process.env.PORT;
 //     credentials: true,
 //   })
 // );
-app.use(cors({ credentials: true, origin: "https://uplloads.herokuapp.com" }));
+app.use(cors({ credentials: true, origin: ["https://uplloads.herokuapp.com", "https://uplloads.herokuapp.com/get", "https://uplloads.herokuapp.com/upload", "https://uplloads.herokuapp.com/register"] }));
 // app.use((req, res, next) => {
 //   res.setHeader(
 //     "Access-Control-Allow-Origin",
