@@ -18,29 +18,29 @@ var port = process.env.PORT;
 //     credentials: true,
 //   })
 // );
-app.use(cors({ credentials: true, origin: "https://uplloads.herokuapp.com"}));
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://uplloads.herokuapp.com"
-//   );
+//app.use(cors({ credentials: true, origin: "https://uplloads.herokuapp.com"}));
+ app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://uplloads.herokuapp.com"
+  );
 
-//   // Request headers you wish to allow
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "X-Requested-With,content-type"
-//   );
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
 
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader("Access-Control-Allow-Credentials", true);
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
-//   if (req.method === "OPTIONS") {
-//     res.header("Access-Control-Allow-Methods", "POST,GET");
-//     return res.status(200).json({});
-//   }
-//   next();
-// });
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "POST,GET");
+    return res.status(200).json({});
+  }
+  next();
+});
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -58,5 +58,5 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-app.use("/", cors(), authRoutes);
+app.use("/", authRoutes);
 app.listen(port || 4000, () => console.log(`Server running on port ${port}!`));
