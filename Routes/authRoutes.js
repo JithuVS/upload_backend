@@ -14,7 +14,7 @@ const { checkUser } = require("../Middlewares/authMiddleware");
 const router = require("express").Router();
 
 router.post("/", checkUser);
-router.post("/getDetails", getDetails);
+router.get("/getDetails", getDetails);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/upload", upload.single("fileName"), uploads);

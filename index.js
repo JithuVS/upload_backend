@@ -11,8 +11,7 @@ var port = process.env.PORT || 4000;
 
 app.use(
   cors({
-   // origin: ["https://uplloads.herokuapp.com"],
-    origin: ["https://629498ab302e981335b26b64--effervescent-vacherin-feb9c8.netlify.app"],
+    origin: ["https://uplloads.herokuapp.com"],
     credentials: true,
   })
 );
