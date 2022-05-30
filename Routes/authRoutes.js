@@ -13,8 +13,8 @@ const { register, login, uploads, getDetails } = require("../Controllers/authCon
 const { checkUser } = require("../Middlewares/authMiddleware");
 const router = require("express").Router();
 
-router.get("/get", getDetails);
 router.post("/", checkUser);
+router.get("/get", getDetails);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/upload", upload.single("fileName"), uploads);
