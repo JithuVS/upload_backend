@@ -49,6 +49,7 @@ module.exports.register = async (req, res, next) => {
       withCredentials: true,
       httpOnly: false,
       maxAge: maxAge * 1000,
+      sameSite: 'none'
     });
 
     res.status(201).json({ user: user._id, created: true });
@@ -64,7 +65,12 @@ module.exports.login = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt", token, { httpOnly: false, maxAge: maxAge * 1000 });
+    res.cookie("jwt", token, {
+      withCredentials: true,
+      httpOnly: false,
+      maxAge: maxAge * 1000,
+      sameSite: 'none'
+    });
     res.status(200).json({ user: user._id, status: true });
   } catch (err) {
     const errors = handleErrors(err);
@@ -79,15 +85,18 @@ module.exports.uploads = async (req, res) => {
     const data = req.body;
     if (token) {
       jwt.verify(token, process.env.secret_key, async (err, decodedToken) => {
-          user = await User.findById(decodedToken.id);
-          if (user) {
-            let owner = decodedToken.id;
-            var result = await uploadToCloudinary(locaFilePath, { ...data, owner });
-            return res.status(200).json(result);
-          }else{
-            res.json({ error:"user not found", status: false });
-          }
-      })
+        user = await User.findById(decodedToken.id);
+        if (user) {
+          let owner = decodedToken.id;
+          var result = await uploadToCloudinary(locaFilePath, {
+            ...data,
+            owner,
+          });
+          return res.status(200).json(result);
+        } else {
+          res.json({ error: "user not found", status: false });
+        }
+      });
     }
   } catch (err) {
     const errors = handleErrors(err);
@@ -140,14 +149,14 @@ module.exports.getDetails = async (req, res) => {
     console.log(token, "token");
     if (token) {
       jwt.verify(token, process.env.secret_key, async (err, decodedToken) => {
-          user = await User.findById(decodedToken.id);
-          let id = decodedToken.id;
-          if(user){
-            let result = await Assets.find({owner: id});
-            return res.status(200).json(result);
-          }
+        user = await User.findById(decodedToken.id);
+        let id = decodedToken.id;
+        if (user) {
+          let result = await Assets.find({ owner: id });
+          return res.status(200).json(result);
+        }
       });
-    }   
+    }
   } catch (err) {
     const errors = handleErrors(err);
     res.json({ errors, status: false });
