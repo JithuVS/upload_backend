@@ -15,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+console.log("called");
 
 //  app.use((req, res, next) => {
 //   res.setHeader(

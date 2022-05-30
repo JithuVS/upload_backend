@@ -137,6 +137,7 @@ async function uploadToCloudinary(locaFilePath, data) {
 module.exports.getDetails = async (req, res) => {
   try {
     const token = req.cookies.jwt;
+    console.log(token, "token");
     if (token) {
       jwt.verify(token, process.env.secret_key, async (err, decodedToken) => {
           user = await User.findById(decodedToken.id);
