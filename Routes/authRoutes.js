@@ -13,10 +13,10 @@ const { register, login, uploads, getDetails } = require("../Controllers/authCon
 const { checkUser } = require("../Middlewares/authMiddleware");
 const router = require("express").Router();
 
+router.get("/get", getDetails);
 router.post("/", checkUser);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/upload", upload.single("fileName"), uploads);
-router.get("/get", getDetails);
 
 module.exports = router;
