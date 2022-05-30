@@ -9,12 +9,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 app.use("/uploads", express.static("uploads"));
 
-var port = process.env.PORT;
+var port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: true,
-    credentials: true
+    origin: ["http://localhost:3000"],
+    method: ["GET", "POST"],
+    credentials: true,
   })
 );
 
@@ -58,4 +59,4 @@ mongoose
     console.log(error.message);
   });
 app.use("/", authRoutes);
-app.listen(port || 4000, () => console.log(`Server running on port ${port}!`));
+app.listen(port, () => console.log(`Server running on port ${port}!`));
