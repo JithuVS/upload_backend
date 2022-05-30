@@ -12,7 +12,10 @@ app.use("/uploads", express.static("uploads"));
 var port = process.env.PORT;
 
 app.use(
-  cors()
+  cors({
+    origin: true,
+    credentials: true
+  })
 );
 //  app.use((req, res, next) => {
 //   res.setHeader(
