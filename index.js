@@ -11,35 +11,11 @@ var port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["https://uplloads.herokuapp.com"],
+   // origin: ["https://uplloads.herokuapp.com"],
+    origin: ["http://localhost:3000/"],
     credentials: true,
   })
 );
-console.log("called");
-
-//  app.use((req, res, next) => {
-//   res.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://uplloads.herokuapp.com"
-//   );
-
-//   // Request headers you wish to allow
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "X-Requested-With,content-type"
-//   );
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-
-//   if (req.method === "OPTIONS") {
-//     res.header("Access-Control-Allow-Methods", "POST, GET");
-//     return res.status(200).json({});
-//   }
-//   next();
-// });
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
