@@ -7,14 +7,11 @@ const authRoutes = require("./Routes/authRoutes");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
-app.use("/uploads", express.static("uploads"));
-
 var port = process.env.PORT || 4000;
 
 app.use(
   cors({
     origin: ["https://uplloads.herokuapp.com"],
-    method: ["GET", "POST"],
     credentials: true,
   })
 );
@@ -46,6 +43,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+app.use("/uploads", express.static("uploads"));
 const url = process.env.url;
 mongoose
   .connect(url, {
