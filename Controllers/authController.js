@@ -46,7 +46,7 @@ module.exports.register = async (req, res, next) => {
     const token = createToken(user._id);
 
     res.cookie("jwt", token, {
-      domain: '.herokuapp.com',
+      domain: '*.herokuapp.com',
       withCredentials: true,
       httpOnly: false,
       maxAge: maxAge * 1000,
@@ -68,7 +68,7 @@ module.exports.login = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     res.cookie("jwt", token, {
-      domain: '.herokuapp.com',
+      domain: '*.herokuapp.com',
       withCredentials: true,
       httpOnly: false,
       maxAge: maxAge * 1000,
