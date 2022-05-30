@@ -22,7 +22,7 @@ var port = process.env.PORT;
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://uplooads.herokuapp.com"
+    "https://uplloads.herokuapp.com"
   );
 
   // Request headers you wish to allow
