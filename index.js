@@ -18,7 +18,7 @@ var port = process.env.PORT;
 //     credentials: true,
 //   })
 // );
-app.use(cors({ credentials: true, origin: ["https://uplloads.herokuapp.com", "https://uplloads.herokuapp.com/get", "https://uplloads.herokuapp.com/upload", "https://uplloads.herokuapp.com/register"] }));
+app.use(cors({ credentials: true, origin: "https://uplloads.herokuapp.com"}));
 // app.use((req, res, next) => {
 //   res.setHeader(
 //     "Access-Control-Allow-Origin",
@@ -58,5 +58,5 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-app.use("/", authRoutes);
+app.use("/", cors(), authRoutes);
 app.listen(port || 4000, () => console.log(`Server running on port ${port}!`));
