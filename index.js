@@ -11,7 +11,7 @@ var port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["http://uplloads.herokuapp.com"],
+    origin: ["https://uplloads.herokuapp.com"],
     credentials: true
   })
 );
