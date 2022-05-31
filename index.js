@@ -13,6 +13,7 @@ app.use(
   cors({
     origin: ["https://uplloads.herokuapp.com"],
     credentials: true,
+    exposedHeaders: ["set-cookie"]
   })
 );
 app.use(express.json());
