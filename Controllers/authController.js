@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const dotenv = require("dotenv");
+const {isRaw, isVideo} = require("../utils/utils");
 dotenv.config();
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -115,13 +116,21 @@ cloudinary.config({
 async function uploadToCloudinary(locaFilePath, data) {
   var mainFolderName = "main";
   var filePathOnCloudinary = mainFolderName + "/" + locaFilePath;
+  const config = { public_id: filePathOnCloudinary };
+  if(isVideo(locaFilePath)){
+    config['resource_type'] = "video";
+  }
+  if(isRaw(locaFilePath)){
+    config['resource_type'] = "raw";
+  }
   return cloudinary.uploader
-    .upload(locaFilePath, { public_id: filePathOnCloudinary })
+    .upload(locaFilePath, config )
     .then(async (result) => {
       fs.unlinkSync(locaFilePath);
-      const { company, name, language, note, owner } = data;
-      const { asset_id, resource_type, version, original_extension, url } =
+      let { company, name, language, note, owner } = data;
+      let { asset_id, resource_type, version, original_extension, format, url } =
         result;
+      original_extension = original_extension || format || 'raw';
       await Assets.create({
         company,
         owner,
