@@ -11,9 +11,8 @@ var port = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["https://uplloads.herokuapp.com"],
-    credentials: true,
-    exposedHeaders: ["set-cookie"]
+    origin: ["http://localhost:3000"],
+    credentials: true
   })
 );
 app.use(express.json());
